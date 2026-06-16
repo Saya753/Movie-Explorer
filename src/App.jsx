@@ -8,27 +8,67 @@ import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
-export default function App() {
+function Layout({ children }) {
   return (
     <>
       <Navbar />
+      {children}
+    </>
+  );
+}
 
-      <Routes>
-        <Route path="/" element={<Explorer />} />
-        <Route path="/movie/:id" element={<MovieDetail />} />
-        <Route path="/login" element={<Login />} />
+export default function App() {
+  return (
+    <Routes>
+      {/* public layout */}
+      <Route
+        path="/"
+        element={
+          <Layout>
+            <Explorer />
+          </Layout>
+        }
+      />
 
-        <Route
-          path="/watchlist"
-          element={
+      <Route
+        path="/movie/:id"
+        element={
+          <Layout>
+            <MovieDetail />
+          </Layout>
+        }
+      />
+
+      <Route
+        path="/login"
+        element={
+          <Layout>
+            <Login />
+          </Layout>
+        }
+      />
+
+      {/* protected route */}
+      <Route
+        path="/watchlist"
+        element={
+          <Layout>
             <ProtectedRoute>
               <Watchlist />
             </ProtectedRoute>
-          }
-        />
+          </Layout>
+        }
+      />
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </>
+      {/* fallback */}
+      <Route
+        path="*"
+        element={
+          <Layout>
+            <NotFound />
+          </Layout>
+        }
+      />
+    </Routes>
   );
 }

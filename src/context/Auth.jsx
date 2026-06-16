@@ -1,15 +1,7 @@
-// state:
-// isLoggedIn
-// user
-// login()
-// logout()
+import { createContext, useContext, useState, useMemo } from "react";
 
-import { createContext, useContext, useState } from "react";
+const AuthContext = createContext(null);
 
-// 1. ایجاد کانتکست
-const AuthContext = createContext();
-
-// 2. ساخت Provider برای مدیریت وضعیت و توابع
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
@@ -18,9 +10,9 @@ export const AuthProvider = ({ children }) => {
     if (username === "admin" && password === "1234") {
       setIsLoggedIn(true);
       setUser(username);
-      return true; // برای هدایت کاربر به صفحه واچ‌لیست در کامپوننت لاگین
+      return true;
     }
-    return false; // برای نمایش خطا و فوکوس روی input در کامپوننت لاگین
+    return false;
   };
 
   const logout = () => {
@@ -28,18 +20,23 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  return (
-    <AuthContext.Provider value={{ isLoggedIn, user, login, logout }}>
-      {children}
-    </AuthContext.Provider>
+  const value = useMemo(
+    () => ({
+      isLoggedIn,
+      user,
+      login,
+      logout,
+    }),
+    [isLoggedIn, user],
   );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-// 3. هوک سفارشی برای دسترسی راحت‌تر در کامپوننت‌ها
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error("AuthProvider is missing");
   }
   return context;
 };

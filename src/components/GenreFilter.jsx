@@ -1,17 +1,19 @@
 import React from "react";
 
-export default function GenreFilter({ genres, value, onChange }) {
+function GenreFilter({ genres, selectedGenre, onSelectGenre }) {
   return (
-    <select
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-    >
-      <option value="">All genre</option>
+    <div className="genre-filter">
       {genres.map((genre) => (
-        <option key={genre} value={genre}>
+        <button
+          key={genre}
+          onClick={() => onSelectGenre(genre)}
+          className={selectedGenre === genre ? "active" : ""}
+        >
           {genre}
-        </option>
+        </button>
       ))}
-    </select>
+    </div>
   );
 }
+
+export default GenreFilter;
