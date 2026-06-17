@@ -24,7 +24,7 @@ export default function Login() {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Login to system</h2>
+      <h2>Please login to system</h2>
       <input
         ref={usernameRef}
         value={username}
@@ -37,9 +37,9 @@ export default function Login() {
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password: "
       />
-      <button type="submit">Login</button>
-      {error && (<p style={{ color: "red" }}>Username or password is wrong.</p>)}
-      <p>(admin / 1234)</p>
+      <button type="submit">Enter</button>
+      {error && <p style={{ color: "red" }}>Username or password is wrong.</p>}
+      {/* <p>(admin / 1234)</p> */}
     </form>
   );
 }

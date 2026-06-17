@@ -16,7 +16,7 @@ const MovieCard = React.memo(function MovieCard({
 
       <Link to={`/movie/${movie.id}`}>Details</Link>
 
-      <button onClick={() => onAction(movie)}>{actionLabel}</button>
+      {/* <button onClick={() => onAction(movie)}>{actionLabel}</button> */}
     </div>
   );
 });

@@ -57,17 +57,19 @@ export default function Explorer() {
     <div>
       {showToast && <div className="toast">Added to watchlist</div>}
 
-      <Searchbox
-        ref={searchRef}
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <div className="filters-row">
+        <Searchbox
+          ref={searchRef}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
 
-      <GenreFilter
-        genres={genres}
-        selectedGenre={genre}
-        onSelectGenre={setGenre}
-      />
+        <GenreFilter
+          genres={genres}
+          selectedGenre={genre}
+          onSelectGenre={setGenre}
+        />
+      </div>
 
       {filteredMovies.length === 0 ? (
         <p>No movies found.</p>
@@ -77,7 +79,7 @@ export default function Explorer() {
             key={movie.id}
             movie={movie}
             onAction={handleAdd}
-            actionLabel={isInWatchlist(movie.id) ? "Added" : "Add"}
+            // actionLabel={isInWatchlist(movie.id) ? "Added" : "Add"}
           />
         ))
       )}

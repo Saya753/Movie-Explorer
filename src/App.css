@@ -229,3 +229,23 @@
     border-right-color: var(--border);
   }
 }
+
+.filters-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.filters-row input {
+  width: 300px;
+  padding: 8px;
+}
+
+.filters-row .genre-filter {
+  margin: 0;
+}
+
+.filters-row {
+  border: 3px solid rgb(225, 255, 0);
+}
