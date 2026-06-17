@@ -15,17 +15,21 @@ export default function Navbar() {
         padding: "10px",
       }}
     >
+      {/* همیشه نمایش داده می‌شود */}
       <NavLink to="/">Explore</NavLink>
 
-      <NavLink to="/watchlist">Watch List ({count})</NavLink>
+      {/* فقط وقتی لاگین هستی */}
+      {isLoggedIn && <NavLink to="/watchlist">Watch List ({count})</NavLink>}
 
-      {isLoggedIn ? (
+      {/* فقط وقتی لاگین نیستی */}
+      {!isLoggedIn && <NavLink to="/login">Login</NavLink>}
+
+      {/* فقط وقتی لاگین هستی */}
+      {isLoggedIn && (
         <>
           <span>User: {user}</span>
           <button onClick={logout}>Logout</button>
         </>
-      ) : (
-        <NavLink to="/login">Login</NavLink>
       )}
     </nav>
   );
