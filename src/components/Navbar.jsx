@@ -17,8 +17,6 @@ export default function Navbar() {
     >
       <NavLink to="/">Movie Explorer</NavLink>
 
-      <NavLink to="/">Explore</NavLink>
-
       <NavLink to="/watchlist">Watch List ({count})</NavLink>
 
       {isLoggedIn ? (
