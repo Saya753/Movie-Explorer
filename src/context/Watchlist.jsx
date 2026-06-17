@@ -6,8 +6,6 @@ import {
   useCallback,
   useMemo,
 } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "./Auth";
 
 const WatchlistContext = createContext(null);
 
@@ -19,7 +17,7 @@ export function WatchlistProvider({ children }) {
     try {
       const saved = localStorage.getItem("watchlist");
       return saved ? JSON.parse(saved) : [];
-    } catch (err) {
+    } catch {
       return [];
     }
   });
@@ -31,7 +29,7 @@ export function WatchlistProvider({ children }) {
     try {
       localStorage.setItem("watchlist", JSON.stringify(watchlist));
     } catch (err) {
-      console.error("Failed to save watchlist:", err);
+      console.error(err);
     }
   }, [watchlist]);
 
@@ -57,9 +55,7 @@ export function WatchlistProvider({ children }) {
   // CHECK MOVIE (memoized lookup)
   // ----------------------------
   const isInWatchlist = useCallback(
-    (id) => {
-      return watchlist.some((m) => m.id === id);
-    },
+    (id) => watchlist.some((m) => m.id === id),
     [watchlist],
   );
 
@@ -94,10 +90,6 @@ export function WatchlistProvider({ children }) {
 // ----------------------------
 export function useWatchlist() {
   const context = useContext(WatchlistContext);
-
-  if (!context) {
-    throw new Error("useWatchlist must be used within WatchlistProvider");
-  }
-
+  if (!context) throw new Error("useWatchlist must be used within provider");
   return context;
 }

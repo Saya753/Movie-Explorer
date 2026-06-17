@@ -1,8 +1,10 @@
 import { useState, useMemo, useCallback } from "react";
 import { useWatchlist } from "../context/Watchlist";
+import { useAuth } from "../context/Auth";
 import WatchlistItem from "../components/WatchlistItem";
 
 export default function Watchlist() {
+  const { isLoggedIn } = useAuth();
   const { watchlist, removeMovie } = useWatchlist();
 
   const [search, setSearch] = useState("");
@@ -19,6 +21,10 @@ export default function Watchlist() {
     },
     [removeMovie],
   );
+
+  if (!isLoggedIn) {
+    return <p>Please login to see your watchlist</p>;
+  }
 
   return (
     <div className="watchlist-page">

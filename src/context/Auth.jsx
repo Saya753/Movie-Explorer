@@ -15,14 +15,9 @@ export const AuthProvider = ({ children }) => {
     return false;
   };
 
-  // const logout = () => {
-  //   setIsLoggedIn(false);
-  //   setUser(null);
-  // };
   const logout = () => {
     setIsLoggedIn(false);
     setUser(null);
-    setWatchlist([]);
   };
 
   const value = useMemo(
