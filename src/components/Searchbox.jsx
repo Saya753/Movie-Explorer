@@ -1,12 +1,18 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
-export default function Searchbox({ value, onChange, placeholder }) {
+const Searchbox = forwardRef(function Searchbox(
+  { value, onChange, placeholder },
+  ref,
+) {
   return (
     <input
+      ref={ref}
       type="text"
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={onChange}
       placeholder={placeholder || "Searching..."}
     />
   );
-}
+});
+
+export default Searchbox;

@@ -43,8 +43,6 @@ export default function MovieDetail() {
 
   return (
     <div className="movie-detail">
-      <button onClick={() => navigate(-1)}>Back</button>
-
       <h2>{movie.title}</h2>
 
       <p>

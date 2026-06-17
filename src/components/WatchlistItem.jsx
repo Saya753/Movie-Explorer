@@ -6,14 +6,6 @@ const WatchlistItem = React.memo(function WatchlistItem({ movie, onRemove }) {
     <div className="watchlist-item">
       <h3>{movie.title}</h3>
 
-      <p>
-        <strong>Year:</strong> {movie.year}
-      </p>
-
-      <p>
-        <strong>Genre:</strong> {movie.genre}
-      </p>
-
       <div className="watchlist-actions">
         <Link to={`/movie/${movie.id}`}>
           <button>Details</button>
